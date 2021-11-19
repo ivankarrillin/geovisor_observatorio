@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Consultas>
+    <Consulta id="get_usuario">
+        <sql>
+        SELECT id from usuarios where usuario=$usuario and clave=$clave
+        </sql>
+    </Consulta>
+    <Consulta id="permisos">
+        <sql>
+        select * from usuarios
+        </sql>
+    </Consulta>
+
+</Consultas>
