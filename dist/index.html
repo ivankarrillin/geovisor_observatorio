@@ -2,9 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Vulnerabilidad</title>
-
-  <link rel="icon" href="https://geoportal.dane.gov.co/src/images/general/GEOPORTAL-DANE-favicon-32x32.png">
+  <title>OIN Visor</title>
 
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,12 +18,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" type="text/css"
-    href="https://geoportal.dane.gov.co/src/styles/geoportalfonts.min.css" />
-  <link rel="preload" as="font" as="style" type="font/ttf" crossorigin=""
-    href="https://geoportal.dane.gov.co/src/fonts/DANE-Geovisores.ttf" />
-  <link rel="preload" as="font" as="style" type="font/ttf" crossorigin=""
-    href="https://geoportal.dane.gov.co/src/fonts/DANE-Geovisores.woff" />
+
 
   <meta name="copyright" content="DANE - Departamento Administrativo Nacional de Estadística">
   <meta name="keywords"
@@ -38,6 +31,10 @@
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-40249748-12"></script>
   <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
 
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <link href="css/index1.css" rel="stylesheet"></head>
 
@@ -52,9 +49,9 @@
 
       <!-- <div class="col-12 "><img clas="mx-auto" src="./img/DANE__Geovisor__icon__logoDANE__01.svg" id="logo"> </div> -->
       <div class="row">
-        <div class="col-4"><img class="mx-auto" src="./img/DANE__Geovisor__icon__logoDANE__01.svg" id="logo"
+        <div class="itm1"><img class="mx-auto" src="./img/DANE__Geovisor__icon__logoDANE__01.svg" id="logo"
             alt="logo-dane"> </div>
-        <div class="col-4 offset-1"><img class="mx-auto" src="./img/DANE__Geovisor__icon__logoGeoportal.svg" id="logo"
+        <div class="itm1 offset-1"><img class="mx-auto" src="./img/oin.png" id="logo"
             alt="logo-geoportal"> </div>
       </div>
 
@@ -99,7 +96,7 @@
 
         <div class="col-3 container-tool" id="descarga">
           <!-- <img src="./img/DANE__Geovisor__icon__download.svg" id="logo-descarga" width="20px" class="img-icon"> -->
-          <a href="https://geoportal.dane.gov.co/descargas/vulnerabilidad/VULNRB_IPMxMZ.zip" download>
+          <a href="https://nowsoft.app/geoportal/descargas/oin/ofertas_mercado.zip" download>
             <div class="round-tool">
               <object type="image/svg+xml" data="./img/DANE__Geovisor__icon__download.svg" width="20" height="20"
                 alt="icono-descarga" class="icon-tool"></object>
@@ -170,52 +167,73 @@
             </div>
           </div>
 
-          <button class="accordion active"><i class="fas fa-hand-holding-usd icon-accordion"></i> Indice de pobreza
-            multidimensional</button>
+            <button class="accordion active"><i class="fas fa-map-marker-alt icon-accordion"></i> Ofertas del mercado inmobiliario</button>
           <div class="panel">
             <div class="col-12">
-              <div class="form-group row">
-                <p class="col-4">Activar tema</p>
-                <div class="col-2">
-                  <label class="switchBtn">
-                    <input type="checkbox" value="" id="check_pobreza" name="check_pobreza">
-                    <span class="slide round"></span>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+
+              <div class="grupo">
+                <p class="itm1">Radio datos (área)</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_pobreza" name="transparencia_pobreza">
                 </div>
               </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_pobreza" name="altura_pobreza">
-                </div>
+              <div class="grupo">
+                <p class="itm1">Tipo</p>
+                <div class="itm2 ">
+                <select class="form-control select shadow-none" id="oferta">
+                  <option value='all'>Todo</option>
+                  <option value='Penthouse'>Penthouse</option>
+                  <option value='Apartamento'>Apartamento</option>
+                  <option value='Proyecto'>Proyecto</option>
+                  <option value='Consultorio'>Consultorio</option>
+                  <option value='Apartaestudio'>Apartaestudio</option>
+                  <option value='Edificio'>Edificio</option>
+                  <option value='Finca'>Finca</option>
+                  <option value='Hacienda'>Hacienda</option>
+                  <option value='Casalote_lote'>Casalote_lote</option>
+                  <option value='Local'>Local</option>
+                  <option value='N/A'>N/A</option>
+                  <option value='Casa'>Casa</option>
+                  <option value='Parqueadero'>Parqueadero</option>
+                  <option value='Casalote'>Casalote</option>
+                  <option value='Lote'>Lote</option>
+                  <option value='Oficina'>Oficina</option>
+                  <option value='Bodega'>Bodega</option>
+                </select>
               </div>
+            </div>
+            <div class="grupo">
+              <p class="itm1">Rango valor</p>
+              <div id="my-drbar-container"></div>
+            </div>
+            <div class="grupo">
+              <p class="itm1"></p>
+              <div class="itm3 ">
+                <p id="minval">$0</p>
+                <p id="maxval">$3.000.000.000</p>
+
+              </div>
+            </div>
+              </div>
+
             </div>
 
 
-          </div>
 
 
 
 
-
-          <button class="accordion"><i class="fas fa-users icon-accordion"></i> Grupos por nivel de
-            vulnerabilidad</button>
+<!--
+          <button class="accordion"><i class="fas fa-building icon-accordion"></i> Apartamentos por área</button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
+              <div class="grupo">
 
-                <p class="col-4">Activar tema</p>
+                <p class="itm1">Activar tema</p>
                 <div class="form-check col-2">
-                  <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_riesgo"> -->
+
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_riesgo" name="check_riesgo">
                     <span class="slide round"></span>
@@ -224,31 +242,24 @@
 
               </div>
 
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_riesgo" name="transparencia_riesgo">
                 </div>
               </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_riesgo" name="altura_riesgo">
-                </div>
-              </div>
+
             </div>
           </div>
 
-          <button class="accordion"><i class="fas fa-baby-carriage icon-accordion"></i> Vulnerabilidad de embarazo
-            adolescente</button>
+          <button class="accordion"><i class="fas fa-home icon-accordion"></i> Casas (NPH) por rango de valor m2</button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
+              <div class="grupo">
 
-                <p class="col-4">Activar tema</p>
+                <p class="itm1">Activar tema</p>
                 <div class="form-check col-2">
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_embarazo">
@@ -258,31 +269,26 @@
 
               </div>
 
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_embarazo">
-                </div>
-              </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_embarazo">
                 </div>
               </div>
             </div>
           </div>
 
-          <button class="accordion"><i class="fas fa-briefcase icon-accordion"></i> Reactivación económica empleo joven
+
+          
+          <button class="accordion"><i class="fas fa-car icon-accordion"></i> Apartamentos por número de parqueaderos 
           </button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
+              <div class="grupo">
 
-                <p class="col-4">Activar tema</p>
+                <p class="itm1">Activar tema</p>
                 <div class="form-check col-2">
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_empleo">
@@ -292,34 +298,85 @@
 
               </div>
 
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_empleo">
-                </div>
-              </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_empleo">
                 </div>
               </div>
             </div>
           </div>
 
 
+          -->
 
-          <button class="accordion"><i class="fas fa-male icon-accordion"></i> Adultos mayores de 60 años</button>
+          <button class="accordion"><i class="fas fa-map-marked-alt"></i> Diferencia Unidades prediales</button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
 
-                <p class="col-4">Activar tema</p>
+              <div class="grupo">
+                <p class="itm1">Nota</p>
+                <div>
+                  <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
+                </div>
+              </div>
+
+              <div class="grupo">
+
+                <p class="itm1">Descargar datos</p>
+                <div>
+                  <button class="ver_nota" id=""> <a href="https://nowsoft.app/colectora/externo/files_oin/dif_censales.zip"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</a> </button>
+                </div>
+              </div>
+              <div class="grupo">
+
+                <p class="itm1">Activar tema Urbano</p>
                 <div class="form-check col-2">
-                  <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_adulto60"> -->
+
+                  <label class="switchBtn">
+                    <input type="checkbox" value="" id="check_dif_urbano" name="check_dif_urbano">
+                    <span class="slide round"></span>
+                  </label>
+                </div>
+
+              </div>
+              <div class="grupo">
+
+                <p class="itm1">Activar tema Rural</p>
+                <div class="form-check col-2">
+
+                  <label class="switchBtn">
+                    <input type="checkbox" value="" id="check_dif_rural" name="check_dif_rural">
+                    <span class="slide round"></span>
+                  </label>
+                </div>
+
+              </div>
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
+                  <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
+                    id="transparencia_dif" name="transparencia_dif">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+          <button class="accordion"><i class="fas fa-bed icon-accordion"></i> Mapa de calor integrales de apartamentos Bogotá</button>
+          <div class="panel">
+            <div class="col-12">
+
+              <div class="grupo">
+
+                <p class="itm1">Activar tema</p>
+                <div class="form-check col-2">
+
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_adulto60" name="check_adulto60">
                     <span class="slide round"></span>
@@ -328,32 +385,27 @@
 
               </div>
 
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_adulto60" name="transparencia_adulto60">
                 </div>
               </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_adulto60" name="altura_adulto60">
-                </div>
-              </div>
+
             </div>
           </div>
 
-          <button class="accordion"><i class="fas fa-male icon-accordion"></i> Adultos mayores de 70 años</button>
+
+          <button class="accordion"><i class="fas fa-male icon-accordion"></i> Valores de referencia por manzana (UAECD)</button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
+              <div class="grupo">
 
-                <p class="col-4">Activar tema</p>
+                <p class="itm1">Activar tema</p>
                 <div class="form-check col-2">
-                  <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_adulto70"> -->
+
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_adulto70" name="check_adulto70">
                     <span class="slide round"></span>
@@ -362,36 +414,30 @@
 
               </div>
 
-              <div class="form-group row">
-                <p class="col-4">Transparencia</p>
-                <div class="col-8 ">
+              <div class="grupo">
+                <p class="itm1">Transparencia</p>
+                <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_adulto70" name="transparencia_adulto70">
                 </div>
               </div>
-              <div class="form-group row">
-                <p class="col-4">Altura vista 3D</p>
-                <div class="col-8 ">
-                  <input type="range" min="0" max="100" step="0" value="0" class="form-control-range slider"
-                    id="altura_adulto70" name="altura_adulto70">
-                </div>
-              </div>
+
             </div>
           </div>
 
 
 
-
+<!--
 
 
           <button class="accordion"> <i class="fas fa-clinic-medical icon-accordion"></i> Centros médicos</button>
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
-                <p class="col-4">Activar</p>
+              <div class="grupo">
+                <p class="itm1">Activar</p>
                 <div class="form-check col-2">
-                  <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_ips"> -->
+
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_ips" name="check_ips">
                     <span class="slide round"></span>
@@ -406,10 +452,10 @@
           <div class="panel">
             <div class="col-12">
 
-              <div class="form-group row">
-                <p class="col-4">Activar</p>
+              <div class="grupo">
+                <p class="itm1">Activar</p>
                 <div class="form-check col-2">
-                  <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_hotel"> -->
+
                   <label class="switchBtn">
                     <input type="checkbox" value="" id="check_hotel" name="check_hotel">
                     <span class="slide round"></span>
@@ -421,9 +467,13 @@
             </div>
           </div>
 
+
+
+
+
+
           <div id="loader-capa">
-            <div id="loader"></div>
-            <p>Cargando capa de movilidad</p>
+
           </div>
 
           <div id="movility" style="display:none">
@@ -431,11 +481,11 @@
             <div class="panel">
               <div class="col-12">
 
-                <div class="form-group row">
+                <div class="grupo">
 
-                  <p class="col-4">Activar </p>
+                  <p class="itm1">Activar </p>
                   <div class="form-check col-2">
-                    <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_movilidad"> -->
+
                     <label class="switchBtn">
                       <input type="checkbox" value="" id="check_movilidad" name="check_movilidad">
                       <span class="slide round"></span>
@@ -444,23 +494,23 @@
 
                 </div>
 
-                <div class="form-group row">
-                  <p class="col-4">Transparencia</p>
-                  <div class="col-8 ">
+                <div class="grupo">
+                  <p class="itm1">Transparencia</p>
+                  <div class="itm2 ">
                     <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                       id="transparencia_movilidad" name="transparencia_movilidad">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <p class="col-4">Fecha</p>
-                  <div class="col-8 ">
+                <div class="grupo">
+                  <p class="itm1">Fecha</p>
+                  <div class="itm2 ">
                     <input type="range" min="0" max="1" step="0" value="0" class="form-control-range slider"
                       id="fecha_movilidad" name="fecha_movilidad">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <p class="col-4">Fecha</p>
-                  <div class="col-4 ">
+                <div class="grupo">
+                  <p class="itm1">Fecha</p>
+                  <div class="itm1 ">
                     <p class="texto_fecha">2020-03-02</p>
                   </div>
                   <div class="playpause">
@@ -471,7 +521,7 @@
               </div>
             </div>
           </div>
-
+-->
 
 
 
@@ -482,8 +532,8 @@
           <div class="panel">
             <div class="col-12">
   
-              <div class="form-group row">
-                <p class="col-4">Activar</p>
+              <div class="grupo">
+                <p class="itm1">Activar</p>
                 <div class="form-check col-2">
                   <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_app">
                 </div>
@@ -495,6 +545,7 @@
   -->
         </div>
 
+        <!--
         <div class="row container-title">
           <div class="col">
             <h6>Resultados temáticos</h6>
@@ -525,6 +576,8 @@
             <div class="diagrama" id="chart7"></div>
           </div>
         </div>
+-->
+
       </div>
 
       <div class="row" id="filtro-mapas" style="display:none;">
@@ -585,7 +638,6 @@
 
 
 
-
       <!-- <div class="row">
           <div class="col">
 
@@ -625,7 +677,7 @@
 
           </div>
           <div class="col-9">
-            <h3 id="titulo">Geovisor de Grupos por niveles de vulnerabilidad</h3>
+            <h3 id="titulo">Geovisor de análisis inmobiliario</h3>
           </div>
           <!--
                 <div class="d-flex flex-row-reverse">
@@ -634,113 +686,70 @@
                 -->
         </div>
 
+
+
+
         <div id="state-legend" class="legend">
           <h6 id="title-legend">Leyenda</h6>
 
 
-          <button class="accordion active" id="panel_ipm">Pobreza Multidimensional</button>
+          <button class="accordion" id="panel_ipm">Tipo de inmueble</button>
           <div class="panel leg">
-            <div><span style="background-color: #74004A"></span>Mayor al 80%</div>
-            <div><span style="background-color: #D70289"></span>60.1% al 80%</div>
-            <div><span style="background-color: #CA4D9C"></span>40.1% al 60%</div>
-            <div><span style="background-color: #C56FA5"></span>20.1% al 40%</div>
-            <div><span style="background-color: #D899C1"></span>0.1% al 20%</div>
-            <div><span style="background-color: #FFDFF3"></span>0%</div>
+            <div><span style= " background-color: rgb(19, 150, 77)"></span>Penthouse</div>
+            <div><span style= " background-color: rgb(104, 162, 231)"></span>Apartamento</div>
+            <div><span style= " background-color: rgb(229, 231, 104)"></span>Proyecto</div>
+            <div><span style= " background-color: rgb(231, 196, 104)"></span>Consultorio</div>
+            <div><span style= " background-color: rgb(231, 104, 229)"></span>Apartaestudio</div>
+            <div><span style= " background-color: rgb(54, 167, 228)"></span>Edificio</div>
+            <div><span style= " background-color: rgb(54, 228, 86)"></span>Finca</div>
+            <div><span style= " background-color: rgb(54, 228, 165)"></span>Hacienda</div>
+            <div><span style= " background-color: rgb(25, 138, 97)"></span>Casalote_lote</div>
+            <div><span style= " background-color: rgb(230, 212, 63)"></span>Local</div>
+            <div><span style= " background-color: rgb(140, 139, 132)"></span>N/A</div>
+            <div><span style= " background-color: rgb(231, 104, 116)"></span>Casa</div>
+            <div><span style= " background-color: rgb(173, 104, 231)"></span>Parqueadero</div>
+            <div><span style= " background-color: rgb(110, 53, 158)"></span>Casalote</div>
+            <div><span style= " background-color: rgb(72, 22, 195)"></span>Lote</div>
+            <div><span style= " background-color: rgb(93, 195, 22)"></span>Oficina</div>
+            <div><span style= " background-color: rgb(116, 22, 159)"></span>Bodega</div>
+            
           </div>
 
-          <button class="accordion" id="panel_riesgo">Nivel de vulnerabilidad</button>
+          <button class="accordion" id="panel_dif">Diferencias censales</button>
           <div class="panel leg">
-            <div><span style="background-color: #FFD0BE"></span>baja</div>
-            <div><span style="background-color: #FF955C"></span>media-baja</div>
-            <div><span style="background-color: #FF6F35"></span>media</div>
-            <div><span style="background-color: #FF3E35"></span>media-alta</div>
-            <div><span style="background-color: #950000"></span>alta</div>
-          </div>
-
-          <button class="accordion" id="panel_embarazo">Vulnerabilidad embarazo adolescente</button>
-          <div class="panel leg">
-            <div><span style="background-color: #560015"></span>Vulnerabilidad alta</div>
-            <div><span style="background-color: #9b0247"></span>Vulnerabilidad media-alta</div>
-            <div><span style="background-color: #e5097f"></span>Vulnerabilidad media</div>
-            <div><span style="background-color: #f568b5"></span>Vulnerabilidad media-baja</div>
-            <div><span style="background-color: #ffa1ef"></span>Vulnerabilidad baja</div>
-          </div>
-
-          <button class="accordion" id="panel_empleo">Reactivación económica empleo joven</button>
-          <div class="panel leg">
-            <div><span style="background-color: #068052"></span>Elegibilidad alta</div>
-            <div><span style="background-color: #09CD82"></span>Elegibilidad media-alta</div>
-            <div><span style="background-color: #17F5A0"></span>Elegibilidad media</div>
-            <div><span style="background-color: #8EFAD1"></span>Elegibilidad media-baja</div>
-            <div><span style="background-color: #D3FDED"></span>Elegibilidad baja</div>
-          </div>
-
-          <button class="accordion" id="panel_adulto60">% Adultos mayores de 60</button>
-          <div class="panel leg">
-            <div><span style="background-color: #1D6BB9"></span>Mayor al 25.1%</div>
-            <div><span style="background-color: #5FA2C5"></span>20.1% al 25%</div>
-            <div><span style="background-color: #70CFB6"></span>15.1% al 20%</div>
-            <div><span style="background-color: #97DEB2"></span>10.1% al 15%</div>
-            <div><span style="background-color: #C7F1BA"></span>0.1% al 10%</div>
-            <div><span style="background-color: #EDFFE7"></span>0%</div>
-          </div>
-          <button class="accordion" id="panel_adulto70">% Adultos mayores de 70</button>
-          <div class="panel leg">
-            <div><span style="background-color: #006859"></span>Mayor al 20.1%</div>
-            <div><span style="background-color: #209C98"></span>15.1% al 20%</div>
-            <div><span style="background-color: #65B1C8"></span>10.1% al 15%</div>
-            <div><span style="background-color: #BECDE6"></span>5.1% al 10%</div>
-            <div><span style="background-color: #E5D4ED"></span>0.1% al 5%</div>
-            <div><span style="background-color: #F4EAFF"></span>0%</div>
+            <div><span style="background-color: #4575b5"></span> Baja - 99% Confianza</div>
+            <div><span style="background-color: #849eb9"></span>Baja 95% Confianza</div>
+            <div><span style="background-color: #c0ccbe"></span>Baja 90% Confianza</div>
+            <div><span style="background-color: #f6f7f1"></span>No significativo</div>
+            <div><span style="background-color: #fab884"></span>Alta 90% Confianza</div>
+            <div><span style="background-color: #ed7552"></span>Alta 95% Confianza</div>
+            <div><span style="background-color: #d62f27"></span> Alta 99% Confianza</div>
           </div>
 
 
-          <button class="accordion" id="panel_ips">Centros médicos</button>
+          <button class="accordion" id="panel_adulto60">Mapa calor apartamentos Bogotá</button>
           <div class="panel leg">
-            <div><span style="background-color: #11b4da"></span>Centros médicos</div>
-          </div>
-          <button class="accordion" id="panel_hotel">Hoteles</button>
-          <div class="panel leg">
-            <div><span style="background-color: #FF8EDE"></span>Hoteles</div>
-          </div>
-          <!--
-                  <button class="accordion">Encuestas CoronaApp</button>
-                  <div class="panel">
-                    <div><span style="background-color: #00AB48"></span>Encuestas</div>
-                  </div>
-                  -->
-          <!--
-                  <button class="accordion">Adultos Mayores</button>
-                  <div class="panel">
-                    <div><span style="background-color: #0071AF"></span>Mayor al 75%</div>
-                    <div><span style="background-color: #7DB9DA"></span>50.1% al 75%</div>
-                    <div><span style="background-color: #7DDAC8"></span>25.1% al 50%</div>
-                    <div><span style="background-color: #ABE18C"></span>0.1% al 25%</div>
-                    <div><span style="background-color: #F4FFD7"></span>0%</div>
-                  </div>
-                  -->
-          <button class="accordion" id="panel_movilidad">Movilidad</button>
-          <div class="panel leg">
-            <div id="mov-colors" class="row">
-              <div id="mov1"></div>
-              <div id="mov2"></div>
-            </div>
-
-            <div id="mov-valores" class="row">
-              <p>-1</p>
-              <p>-0.5</p>
-              <p>0</p>
-              <p>0.5</p>
-              <p>1</p>
-            </div>
-            <p class="m-0 ml-3">-1: baja movilidad</p>
-            <p class="m-0 ml-3"> 1: Alta movilidad</p>
+            <div><span style="background-color: rgb(97, 14, 82)"></span> > $8.3M</div>
+            <div><span style="background-color: rgb(190, 39, 151)"></span>$6M - $8.3M</div>
+            <div><span style="background-color: rgb(221, 44, 31)"></span>$4.3M - 6M</div>
+            <div><span style="background-color: rgb(254, 224, 123)"></span>$3M - $4.3M</div>
+            <div><span style="background-color: rgb(51, 221, 167)"></span>$2M - $3M</div>
+            <div><span style="background-color: rgb(19, 52, 112)"></span> $1.4M - $2M</div>
           </div>
 
+      
 
+          <button class="accordion" id="panel_adulto70">Valores de referencia (UAECD)</button>
+          <div class="panel leg">
+            <div><span style="background-color: hsl(33, 89%, 70%)"></span>$0 - $500.000 m2</div>
+            <div><span style="background-color: hsl(69, 87%, 62%)"></span>$500.000 - $1.000.000 m2</div>
+            <div><span style="background-color: hsl(147, 77%, 57%)"></span>$1.000.000 - $1.500.000 m2</div>
+            <div><span style="background-color: hsl(177, 84%, 50%)"></span>$1.500.000 m2 - $2.500.0000 m2</div>
+            <div><span style="background-color: hsl(206, 91%, 50%)"></span>$2.500.0000 - $3.500.000 m2 </div>
+            <div><span style="background-color: hsl(252, 88%, 44%)"></span>$3.500.000 - $5.500.000 m2 </div>
+            <div><span style="background-color: hsl(275, 87%, 35%)"></span> > $5.000.0000 m2 </div>
+          </div>
         </div>
-
-
 
         <div id="mapa"></div>
 
@@ -759,8 +768,30 @@
             <p>0.5</p>
             <p>1</p>
           </div>
+        </div>
+
+        <div id="panel-info">
+          <div id="content">
+            <p id="titulo">Ofertas de mercado</p>
+            <p id="title">Total ofertas</p>
+            <p id="total">0</p>
+            <p id="title">Datos en mapa</p>
+            <p id="mini">0</p>
+            <figure class="highcharts-figure">
+              <div id="container"></div>
+              <p class="highcharts-description">
+                  Histograma para determinar la distribución de las ofertas de mercado por valor integral de terreno.
+              </p>
+          </figure>
+
+
+
+          </div>
+
 
         </div>
+
+
       </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -776,7 +807,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center">Guia de uso Geovisor de Vulnerabilidad</h5>
+        <h5 class="modal-title w-100 text-center">Guia de uso: Geovisor de Análisis Inmobiliario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -787,11 +818,8 @@
           <!-- <li class="nav-item tab tab-active">
             <a class="nav-link tab-text" data-toggle="tab" role="tab" aria-controls="home">Guia rápida</a>
           </li> -->
+
           <li class="nav-item tab tab-active">
-            <a class="nav-link tab-text" data-toggle="tab" role="tab" aria-controls="profile"><i
-                class="fab fa-youtube"></i> Videotutorial</a>
-          </li>
-          <li class="nav-item tab">
             <a class="nav-link tab-text" data-toggle="tab" role="tab" aria-controls="messages"><i
                 class="fas fa-info"></i> Acerca de</a>
           </li>
@@ -803,22 +831,14 @@
 
         <div class="tab-content">
           <!-- <div class="tab-pane tab-pane-active" id="home" role="tabpanel">...</div> -->
-          <div class="tab-pane tab-pane-active" id="profile" role="tabpanel">
-            <iframe id="iframe" width="100%" height="450px" src="https://www.youtube.com/embed/Fw5vheB3bf0"
-              frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-          <div class="tab-pane" id="messages" role="tabpanel">
+
+          <div class="tab-pane tab-pane-active" id="messages" role="tabpanel">
             <p class="help__content__text">
             <div class="row">
               <div class="col">
-                Herramienta web georreferenciada, en la que se puede identificar la vulnerabilidad de la población ante
-                el fenómeno de contagio por el covid-19.
-                La visualización esta para el nivel Manzana Censal de todas las cabeceras de todos los municipios del
-                país, y se identifica para cada una ellas el Nivel de Vulnerabilidad.
+                Herramienta web georreferenciada, en la que se puede analizar la dinámica inmobiliaria del país. Las ofertas de mercado han sido obtenidas mediante la estrategia de WebScrapping.
                 <br>
-                El visor facilita la toma de decisiones en política pública y ayuda a focalizar las acciones de
-                prevención y atención a la población vulnerable.
+                El visor facilita el análisis de la información inmobiliaria por parte de los gestores y operadores catastrales y el público en general. 
               </div>
             </div>
             <br>
@@ -828,16 +848,8 @@
                 <br>
                 <a id="nota"
                   href="https://www.dane.gov.co/files/comunicados/Nota_metodologica_indice_de_vulnerabilidad.pdf"
-                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Niveles de Vulnerabilidad </a>
+                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Documento WebScrapping </a>
                 <br>
-                <a id="nota"
-                  href="https://geoportal.dane.gov.co/descargas/documentos/nota_metodologica_visor_embarazo_adolescente.pdf"
-                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Vulnerabilidad Embarazo
-                  Adolescente </a>
-                <br>
-                <a id="nota" href="https://geoportal.dane.gov.co/descargas/documentos/nota-metodologica-visor-final.pdf"
-                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Reactivación Económica Empleo
-                  Joven </a>
               </div>
               <div class="col">
                 <br>
@@ -873,6 +885,34 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal" id="exampleModalCenter" tabindex="5" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Diferencias censales - Unidades prediales (IGAC)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-12 "><img clas="mx-auto" src="./img/diferencias_censales.jpg" id="nota_img" alt="dif"> </div>
+
+        <p>Capa de información que muestra la diferencia entre la información de las unidades censales obtenidas en el Censo Nacional de Población y Vivienda - CNPV 2018 contra la información del número de predios de IGAC (2020). La información se presenta anonimizada a nivel de manzana en el sector urbano y en el sector rural por secciones rurales.</p>
+
+        <a id="comunicado"
+        href="https://nowsoft.app/colectora/externo/files_oin/Nota_HotSpot.pdf"
+        target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Nota Metodológica</a>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -882,522 +922,6 @@
 <!-- include the lib -->
 <script src="https://unpkg.com/frappe-datatable@0.0.5/dist/frappe-datatable.min.js"></script>
 
-<script>
 
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart1',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'Número de manzanas por IPM',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-    colors: ['#FFDFF3', '#D899C1', '#C56FA5', '#CA4D9C', '#D70289', '#74004A'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 0.5
-      }
-    },
-    xaxis: {
-      categories: ['0%', '0.1% - 20%', '20.1% - 40%', '40.1% - 60%', '60.1% - 80%', ' > 80%'
-      ],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Rangos de incidencia',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart2"), options);
-  chart.render();
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart2',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'Número de manzanas por grupos de vulnerabilidad',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-
-    colors: ['#FFD0BE', '#FF955C', '#FF6F35', '#FF3E35', '#950000'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 1,
-        color: '#263238',
-      }
-    },
-
-    xaxis: {
-      categories: ['baja', 'media-baja', 'media', 'media-alta', 'alta'
-      ],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Grupos por nivel de riesgo',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart3"), options);
-  chart.render();
-
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart3',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'manzanas por % de adultos mayores de 60',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-
-    colors: ['#EDFFE7', '#C7F1BA', '#97DEB2', '#70CFB6', '#5FA2C5', '#1D6BB9'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 1,
-        color: '#263238',
-      }
-    },
-
-    xaxis: {
-      categories: ['0%', '0.1% - 10%', '10.1% - 15%', '15.1% - 20%', '20.1% - 25%', ' > 25%'
-      ],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: '% Adultos mayores de 60 años',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart4"), options);
-  chart.render();
-
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart4',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'Manzanas por % de adultos mayores de 70',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-
-    colors: ['#F4EAFF', '#E5D4ED', '#BECDE6', '#9ABBF8', '#209C98', '#006859'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 1,
-        color: '#263238',
-      }
-    },
-
-    xaxis: {
-      categories: ['0%', '0.1% - 5%', '5.1% - 10%', '10.1% - 15%', '15.1% - 20%', ' > 20%'
-      ],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: '% Adultos mayores de 70 años',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart5"), options);
-  chart.render();
-
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart6',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'Manzanas por vulnerabilidad de embarazo adolescente',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-
-    colors: ['#ffa1ef', '#f568b5', '#e5097f', '#9b0247', '#560015'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 1,
-        color: '#263238',
-      }
-    },
-
-    xaxis: {
-      categories: ['Baja', 'Media-baja', 'Media', 'Media-alta', 'Alta'],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Grupos por nivel de riesgo',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart6"), options);
-  chart.render();
-
-
-  var options = {
-    series: [{
-      data: [0, 0, 0, 0, 0]
-    }],
-    chart: {
-      id: 'chart7',
-      type: 'bar',
-      height: 200,
-      toolbar: {
-        show: false
-      }
-    },
-    plotOptions: {
-      bar: {
-        distributed: true,
-        horizontal: true
-      }
-    },
-
-    title: {
-      text: 'Manzanas reactivación económica empleo joven',
-      align: 'center',
-      margin: 0,
-      offsetX: 0,
-      offsetY: 0,
-      floating: false,
-      style: {
-        fontSize: '12px',
-        fontWeight: 'bold',
-        fontFamily: undefined,
-        color: '#263238'
-      },
-    },
-
-    colors: ['#D3FDED', '#8EFAD1', '#17F5A0', '#09CD82', '#068052'],
-    dataLabels: {
-      enabled: true,
-      dropShadow: {
-        enabled: true,
-        left: 2,
-        top: 2,
-        opacity: 1,
-        color: '#263238',
-      }
-    },
-
-    xaxis: {
-      categories: ['Baja', 'Media-baja', 'Media', 'Media-alta', 'Alta'],
-      title: {
-        text: 'Número de manzanas',
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-xaxis-title',
-        },
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Grupos por nivel de elegibilidad',
-        rotate: 90,
-        offsetX: 0,
-        offsetY: 0,
-        style: {
-          color: '#000000',
-          fontSize: '12px',
-          fontFamily: 'Helvetica, Arial, sans-serif',
-          fontWeight: 400,
-          cssClass: 'apexcharts-yaxis-title',
-        },
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart7"), options);
-  chart.render();
-
-
-
-
-
-</script>
 
 </html>

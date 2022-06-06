@@ -37,7 +37,10 @@ module.exports = {
 
   module: {
     rules: [
-        {test: /\.css?$/,include: /node_modules/,  loaders: ['style-loader', 'css-loader']},
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
         {
             test: /\.scss?$/,
             
@@ -59,8 +62,6 @@ module.exports = {
 
 
         },
-        
-        { test: /\.json$/,type:'javascript/auto', loader: 'json-loader' },
         {
           test: /\.js$/,
           exclude: /node_modules/,

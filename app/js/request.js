@@ -28,11 +28,8 @@ function servidorGet(uri) {
 
 
 function getData(uri) {
-    if (uri=="visor-vulnerabilidad/mov1") {
-        direccion = "https://visor01.dane.gov.co/"
-        uri="visor-vulnerabilidad/mov"
-    }
-    return axios.get(direccion+uri,
+    
+    return axios.get(uri,
         
         {
             responseType: 'arraybuffer'
