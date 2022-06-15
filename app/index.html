@@ -21,10 +21,13 @@
 
 
   <meta name="copyright" content="DANE - Departamento Administrativo Nacional de Estadística">
+
   <meta name="keywords"
     content="geoportal,dane,geo visor,geovisor,covid,covid-19,pandemia,colombia,riesgo,habitante,vulnerabilidad,departamental,vital,pib,precios corrientes,codigos municipios,dane mapas,mapas dane,visor dane,visor,geoportales y visores geograficos en colombia,visor dane">
+
   <meta name="description"
-    content="El geovisor permite la consulta geográfica por departamento y municipio del nivel de riesgo de vulnerabilidad al covid y otras capas" />
+    content="Geovisor de análisis de la dinamica inmobiliaria, herramienta de apoyo en el catastro multipropósito." />
+
   <meta name="robots" content="follow" />
   <link reel="canonical" href="https://visor01.dane.gov.co/visor-vulnerabilidad/" />
   <meta name="google-site-verification" content="GfeoIrutQaM3rz5HPrtXFtWSP1WigTdXG3ckxcFUVWc">
@@ -175,7 +178,7 @@
             </div>
           </div>
 
-            <button class="accordion active"><i class="fas fa-map-marker-alt icon-accordion"></i> Ofertas del mercado inmobiliario</button>
+            <button class="accordion active"><i class="fas fa-map-marker-alt icon-accordion"></i> Mercado Inmobiliario </button>
           <div class="panel">
             <div class="col-12">
 
@@ -221,15 +224,11 @@
                   <option value='all'>Todo</option>
                   <option value='Penthouse'>Penthouse</option>
                   <option value='Apartamento'>Apartamento</option>
-                  <option value='Proyecto'>Proyecto</option>
                   <option value='Consultorio'>Consultorio</option>
                   <option value='Apartaestudio'>Apartaestudio</option>
                   <option value='Edificio'>Edificio</option>
-                  <option value='Finca'>Finca</option>
-                  <option value='Hacienda'>Hacienda</option>
                   <option value='Casalote_lote'>Casalote_lote</option>
                   <option value='Local'>Local</option>
-                  <option value='N/A'>N/A</option>
                   <option value='Casa'>Casa</option>
                   <option value='Parqueadero'>Parqueadero</option>
                   <option value='Casalote'>Casalote</option>
@@ -267,7 +266,7 @@
             <div class="grupo">
               <p class="itm1">Nota</p>
               <div>
-                <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
+                <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter1"><i class="fas fa-file-pdf"></i> Ver nota</button>
               </div>
             </div>
 
@@ -448,7 +447,12 @@
                     id="transparencia_adulto60" name="transparencia_adulto60">
                 </div>
               </div>
-
+              <div class="grupo">
+                <p class="itm1">Nota</p>
+                <div>
+                  <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter2"><i class="fas fa-file-pdf"></i> Ver nota</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -751,15 +755,11 @@
           <div class="panel leg">
             <div><span style= " background-color: rgb(19, 150, 77)"></span>Penthouse</div>
             <div><span style= " background-color: rgb(104, 162, 231)"></span>Apartamento</div>
-            <div><span style= " background-color: rgb(229, 231, 104)"></span>Proyecto</div>
             <div><span style= " background-color: rgb(231, 196, 104)"></span>Consultorio</div>
             <div><span style= " background-color: rgb(231, 104, 229)"></span>Apartaestudio</div>
             <div><span style= " background-color: rgb(54, 167, 228)"></span>Edificio</div>
-            <div><span style= " background-color: rgb(54, 228, 86)"></span>Finca</div>
-            <div><span style= " background-color: rgb(54, 228, 165)"></span>Hacienda</div>
             <div><span style= " background-color: rgb(25, 138, 97)"></span>Casalote_lote</div>
             <div><span style= " background-color: rgb(230, 212, 63)"></span>Local</div>
-            <div><span style= " background-color: rgb(140, 139, 132)"></span>N/A</div>
             <div><span style= " background-color: rgb(231, 104, 116)"></span>Casa</div>
             <div><span style= " background-color: rgb(173, 104, 231)"></span>Parqueadero</div>
             <div><span style= " background-color: rgb(110, 53, 158)"></span>Casalote</div>
@@ -908,7 +908,7 @@
                 <h6>Notas metodológicas</h6>
                 <br>
                 <a id="nota"
-                  href="https://www.dane.gov.co/files/comunicados/Nota_metodologica_indice_de_vulnerabilidad.pdf"
+                  href="https://nowsoft.app/colectora/externo/files_oin/documento.pdf"
                   target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Documento Observatorio </a>
                 <br>
               </div>
@@ -968,6 +968,68 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal" id="exampleModalCenter1" tabindex="5" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Mercado Inmobiliario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-12 "><img clas="mx-auto" src="./img/mercado_inmobiliario.jpg" id="nota_img" alt="dif"> </div>
+
+        <p>Capa de información que muestra de forma anonimizada la información del mercado inmobiliario proveniente de Gestores y operadores catastrales, páginas web del mercado inmobiliario, avalúos, transacciones de Superintendencia de Notariado y Registro entre otros.</p>
+
+        <a id="comunicado"
+        href="https://nowsoft.app/colectora/externo/files_oin/nota_mercado.pdf"
+        target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Nota Metodológica</a>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="exampleModalCenter2" tabindex="5" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Mapa de calor valores integrales de Apartamentos en Bogotá</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-12 "><img clas="mx-auto" src="./img/kriging.jpg" id="nota_img" alt="dif"> </div>
+
+        <p>Capa de información que muestra el resultado del proceso de interpolación espacial Kriging sobre el mercado inmobiliario de apartamentos en Bogotá el cual ha sido ajustado mediante la información de puntos de interés como parques, estaciones del SITP, centros médicos y centros comerciales en el calculo del valor integral de construcción. Es una estadística experimental. </p>
+
+        <a id="comunicado"
+        href="https://nowsoft.app/colectora/externo/files_oin/kriging.pdf"
+        target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Nota Metodológica</a>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
