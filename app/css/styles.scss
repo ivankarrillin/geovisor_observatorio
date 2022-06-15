@@ -142,7 +142,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.itm1, .itm2{
+.grupo1{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.itm1, .itm2,.itm3{
   display: grid;
 }
 .itm3{
@@ -557,7 +562,7 @@ p,label{
 
 .mapboxgl-popup-content{
   width: auto;
-  height: 300px;
+  height: auto;
   overflow-y: scroll;
 }
 

@@ -184,7 +184,7 @@
 
               <div class="grupo">
 
-                <p class="itm1">Activar tema</p>
+                <p class="itm1">Activar capa geográfica</p>
                 <div class="form-check col-2">
 
                   <label class="switchBtn">
@@ -218,7 +218,7 @@
 
 
               <div class="grupo">
-                <p class="itm1">Tipo</p>
+                <p class="itm1">Tipo de inmueble</p>
                 <div class="itm2 ">
                 <select class="form-control select shadow-none" id="oferta">
                   <option value='all'>Todo</option>
@@ -264,7 +264,7 @@
 
 
             <div class="grupo">
-              <p class="itm1">Nota</p>
+              <p class="itm1">Nota metodológica</p>
               <div>
                 <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter1"><i class="fas fa-file-pdf"></i> Ver nota</button>
               </div>
@@ -276,7 +276,59 @@
 
 
 
+            <div id="movility" >
+              <button class="accordion"><i class="fas fa-building"></i>  Censo de edificaciones (CEED)</button>
+              <div class="panel">
+                <div class="col-12">
+  
+                  <div class="grupo">
+  
+                    <p class="itm1">Activar capa geográfica</p>
+                    <div class="form-check col-2">
+                      <!-- <input class="form-check-input checkbox-round" type="checkbox" value="" id="check_movilidad"> -->
+                      <label class="switchBtn">
+                        <input type="checkbox" value="" id="check_movilidad" name="check_movilidad">
+                        <span class="slide round"></span>
+                      </label>
+                    </div>
+  
+                  </div>
+  
+                  <div class="grupo">
+                    <p class="itm1">Transparencia</p>
+                    <div class="itm2">
+                      <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
+                        id="transparencia_movilidad" name="transparencia_movilidad">
+                    </div>
+                  </div>
+                  <div class="grupo">
+                    <p class="itm1">Mover trimestre</p>
+                    <div class="itm2">
+                      <input type="range" min="0" max="1" step="0" value="0" class="form-control-range slider"
+                        id="fecha_movilidad" name="fecha_movilidad">
+                    </div>
+                  </div>
+                  <div class="grupo1">
+                    <p class="itm1">Trimestre</p>
+                    <div class="itm2">
+                      <p class="texto_fecha">2019-1</p>
+                    </div>
+                    <div class="playpause itm3">
+                      <input type="checkbox" value="None" id="play_movilidad" name="check" checked />
+                      <label for="play_movilidad" tabindex=1></label>
+                    </div>
+                  </div>
 
+                  <div class="grupo">
+                    <p class="itm1">Nota metodológica</p>
+                    <div>
+                      <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter3"><i class="fas fa-file-pdf"></i> Ver nota</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
 
 
 <!--
@@ -374,7 +426,7 @@
 
               <div class="grupo">
 
-                <p class="itm1">Activar tema Urbano</p>
+                <p class="itm1">Activar capa geográfica (Urbano)</p>
                 <div class="form-check col-2">
 
                   <label class="switchBtn">
@@ -386,7 +438,7 @@
               </div>
               <div class="grupo">
 
-                <p class="itm1">Activar tema Rural</p>
+                <p class="itm1">Activar capa geográfica (Rural)</p>
                 <div class="form-check col-2">
 
                   <label class="switchBtn">
@@ -404,7 +456,7 @@
                 </div>
               </div>
               <div class="grupo">
-                <p class="itm1">Nota</p>
+                <p class="itm1">Nota metodológica</p>
                 <div>
                   <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
                 </div>
@@ -429,7 +481,7 @@
 
               <div class="grupo">
 
-                <p class="itm1">Activar tema</p>
+                <p class="itm1">Activar capa geográfica</p>
                 <div class="form-check col-2">
 
                   <label class="switchBtn">
@@ -448,7 +500,7 @@
                 </div>
               </div>
               <div class="grupo">
-                <p class="itm1">Nota</p>
+                <p class="itm1">Nota metodológica</p>
                 <div>
                   <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter2"><i class="fas fa-file-pdf"></i> Ver nota</button>
                 </div>
@@ -463,7 +515,7 @@
 
               <div class="grupo">
 
-                <p class="itm1">Activar tema</p>
+                <p class="itm1">Activar capa geográfica</p>
                 <div class="form-check col-2">
 
                   <label class="switchBtn">
@@ -809,18 +861,18 @@
 
         <div id="info_fecha" style="display:none;">
           Fecha
-          <p class="texto_fecha">2020-03-02</p>
+          <p class="texto_fecha">2019-1</p>
           <div id="mov-colors1" class="row">
             <div id="mov11"></div>
             <div id="mov21"></div>
           </div>
 
           <div id="mov-valores1" class="row">
-            <p>-1</p>
-            <p>-0.5</p>
             <p>0</p>
-            <p>0.5</p>
-            <p>1</p>
+            <p>5</p>
+            <p>10</p>
+            <p>50</p>
+            <p>>100</p>
           </div>
         </div>
 
@@ -905,7 +957,7 @@
             <br>
             <div class="row">
               <div class="col">
-                <h6>Notas metodológicas</h6>
+                <h6>Nota metodológica</h6>
                 <br>
                 <a id="nota"
                   href="https://nowsoft.app/colectora/externo/files_oin/documento.pdf"
@@ -1027,6 +1079,39 @@
   </div>
 </div>
 
+
+
+
+<div class="modal" id="exampleModalCenter3" tabindex="5" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Información anonimizada Censo de edificaciones (CEED)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-12 "><img clas="mx-auto" src="./img/ceed.jpg" id="nota_img" alt="dif"> </div>
+
+        <p>Capa de información anonimizada con el censo de edificaciones (CEED), disponible para su consulta de forma temporal y descarga desde el portal para los gestores catastrales.</p>
+
+        <a id="comunicado"
+        href="https://www.dane.gov.co/files/investigaciones/boletines/ceed/bol_ceed_Itrim22.pdf"
+        target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Boletin técnico (1er trimestre 2022)</a>
+
+        <a id="comunicado"
+        href="https://www.dane.gov.co/index.php/estadisticas-por-tema/construccion/censo-de-edificaciones"
+        target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Más información</a>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

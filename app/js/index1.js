@@ -28,6 +28,204 @@ import ReactDOM from 'react-dom';
 import Load from './util'
 import DoubleSlider from 'double-slider';
 
+let initialTime = new Date("2020-06-01Z08:00:00")
+   ,endTime     = new Date("2021-02-28Z08:00:00")
+   ,arrTime     = []
+   ,dayMillisec = 24 * 60 * 60 * 1000
+   ;
+for (let q = initialTime; q <= endTime; q = new Date(q.getTime() + dayMillisec)) {
+  arrTime.push(q.toISOString().substring(0, 10));
+}
+
+var mov_json=""
+      
+
+var calendario = [
+"2019-1",
+"2019-2",
+"2019-3",
+"2019-4",
+"2020-1",
+"2020-2",
+"2020-3",
+"2020-4",
+"2021-1",
+"2021-2",
+"2021-3",
+"2021-4",
+"2022-1"
+]
+
+
+
+  const changeValores = (dia) => {
+    mov_json.forEach((row) => {
+        
+        if (row['f'] === dia) {
+          var movilidad = row['m'];
+          var id = row['id'];
+          newdata[id] = {
+              movilidad: movilidad
+          }
+        }
+      })
+}
+  
+  const setCountiesColor = () => {
+    for (let key in newdata) {
+      map.setFeatureState({
+        source: 'mov',
+        sourceLayer: 'ipm-0lz2gv',
+        id: key
+      }, {
+              'color': newdata[key].movilidad < 10 ? blueScale(newdata[key].movilidad) : redScale(newdata[key].movilidad),
+            'movilidad':newdata[key].movilidad,
+            'hover': true
+        
+      })
+        
+    }
+  }
+
+  function blueScale(mov) {
+    
+      var indice = 10- mov;
+
+      if (mov<0) {
+          indice = 0;
+      }
+    //console.log(indice)
+    
+    var color = colorArray_blue[indice];
+    
+
+    return color;
+}
+
+  function redScale(mov) {
+    
+    var indice = mov;
+
+      if (mov>100) {
+          indice = 100;
+      }
+    //console.log(indice)
+    var color = colorArray_red[indice];
+    
+
+    return color;
+  }
+
+  function interpolateColor(color1, color2, factor) {
+    if (arguments.length < 3) { 
+      factor = 0.5; 
+    }
+    var result = color1.slice();
+    for (var i = 0; i < 3; i++) {
+      result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+    }
+    return result;
+    };
+    // My function to interpolate between two colors completely, returning an array
+    function interpolateColors(color1, color2, steps) {
+    var stepFactor = 1 / (steps - 1),
+      interpolatedColorArray = [];
+    
+    color1 = color1.match(/\d+/g).map(Number);
+    color2 = color2.match(/\d+/g).map(Number);
+    
+    for (var i = 0; i < steps; i++) {
+    
+      var array_c=interpolateColor(color1, color2, stepFactor * i)
+      var color3 = '#' + int_to_hex(array_c[0]) + int_to_hex(array_c[1]) + int_to_hex(array_c[2]);
+      interpolatedColorArray.push(color3);
+    }
+    
+    return interpolatedColorArray;
+    }
+    
+    function int_to_hex(num)
+    {
+    var hex = Math.round(num).toString(16);
+    if (hex.length == 1)
+        hex = '0' + hex;
+    return hex;
+    }
+    
+    const colorArray_blue = interpolateColors("rgb(0, 197, 220)", "rgb(98, 0, 110)", 10);
+    const colorArray_red = interpolateColors("rgb(255, 255, 29)", "rgb(255, 29, 29)", 100);
+
+    var input = document.getElementById("fecha_movilidad");
+    input.setAttribute("max",calendario.length);
+
+      var play = "";
+      var valor = 0;
+      
+      $("#play_movilidad").change(function() {
+          if (!this.checked) {
+                          
+              
+                play= setInterval(function(){
+                    valor = valor + 1;
+                    console.log(valor)
+                    var dia = calendario[valor];
+                    $('.texto_fecha').text(dia);
+        
+                    var input = document.getElementById("fecha_movilidad");
+                    input.value = valor;
+        
+        
+                    changeValores(dia)
+            
+                    setCountiesColor();
+
+                if (valor <calendario.length) {
+                    } else {
+                    clearInterval(play);
+                  }
+                  }, 500);
+              
+              
+         
+          } else {
+              
+            clearInterval(play);
+            
+
+        }
+    });
+
+
+    $( "#fecha_movilidad" ).change(function() {
+        valor=parseInt($(this).val())
+        console.log(valor)
+        var dia = calendario[valor];
+        $('.texto_fecha').text(dia);
+        changeValores(dia)
+        setCountiesColor();
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function binData(data) {
@@ -587,7 +785,16 @@ $( "#transparencia_embarazo" ).change(function() {
         
 });
     
+$( "#transparencia_movilidad" ).change(function() {
+    var valor=$(this).val()
+
+  map.setPaintProperty(
+      'movilidad',
+      'fill-opacity',
+      parseInt(valor) / 100
+      );
     
+  }); 
     
     
     
@@ -1028,8 +1235,7 @@ const deck = new Deck({
 
     getTooltip: ({object}) => object && {
         html: `<div>Integral: ${ meanPoints(object.points)}</div>
-               <div>Ofertas: ${object.points.length}</div>`,
-        
+               `,
         style: {
           backgroundColor: '#ffff',
           fontSize: '1.2em'
@@ -1808,8 +2014,172 @@ map.addLayer({
 
 
 
+    axios.get('https://nowsoft.app/colectora/externo/files_oin/movilidad.zip',{
+        responseType: 'arraybuffer',
+    }).then(resp => {
+        getMovility(resp)
+     })
+
+
+    const getMovility=(response)=>{
+
+
+        console.log(response)
+        console.log(response.data)
+        
+        var JSZip = require("jszip");
+        var zip = new JSZip();
+
+          zip.loadAsync(response.data)
+          .then(function(zip) {
+              // you now have every files contained in the loaded zip
+            console.log(zip)
+            
+            zip.file("movilidad.json").async("string").then(function (response) { 
+      
+              response= JSON.parse(response)
+                
+              $.toast({
+                  heading: 'Información',
+                  text: 'Capa de censo de edificaciones (CEED) cargada, verifique el panel izquierdo',
+                  icon: 'info',
+                  loader: true, // Change it to false to disable loader
+                  loaderBg: '#FFFFFF', // To change the background
+                  position: {
+                      right: 50,
+                      top: 100
+                  },
+                  hideAfter: 4000,
+                  bgColor: '#B80150',
+                  textColor: 'white'
+              })
+
+              
+              mov_json = response;
+      
+              mov_json.forEach((row) => {
+                  if (row['f'] === '2019-1') {
+                      const movilidad = row['m'];
+                      const id = row['id'];
+                      newdata[id] = {
+                          movilidad: movilidad
+                      }
+                  }
+              })
+       
+      
+              const initLayers = () => {
+      
+                  console.log("hola")
+                  
+                  map.addSource('mov', {
+                      'type': 'vector',
+                      'url': 'mapbox://ivan12345678.10cdldso',
+                      'promoteId': 'cod_dane'
+                  });
+      
+                  map.addLayer({
+                      'id': 'movilidad',
+                      'type': 'fill',
+                      'source': 'mov',
+                      'source-layer': 'ipm-0lz2gv',
+                      'layout': {
+                        'visibility': 'none'
+                      },
+                      'paint': {
+                          'fill-color': ['feature-state', 'color'],
+                          
+                          'fill-opacity': [
+                              'case',
+                              ['boolean', ['feature-state', 'hover'], false],
+                              1,
+                              0
+                          ]
+                      }
+                  }, 'waterway-label');
+      
+      
+                  const setAfterLoad = (e) => {
+                      if (e.sourceId === 'mov' && e.isSourceLoaded) {
+                          
+                          setCountiesColor();
+                          map.off('sourcedata', setAfterLoad)
+                      }
+                  }
+      
+                  if (map.isSourceLoaded('mov')) {
+                  
+      
+                      setCountiesColor();
+                  } else {
+                    
+      
+                      map.on('sourcedata', setAfterLoad);
+                  }
+              }
+      
+              $('#movility').show();
+      
+              initLayers();
+              
+            })
+            
+      
+      
+          }); 
+  
+  
+  
+  
+  
+      }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
+map.on('click', 'movilidad', function (e) {
+    var mensaje = e.features[0].state.movilidad
+
+    mensaje = mensaje 
+    console.log(e.features[0])
+    new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(
+            '<div class="card">' +
+            '<div class="row">' +
+            '<div class="col">' +
+            ' <img class="card-img-top" src="./img/edificio.png" alt="Card image cap" style="width:50px">' +
+            '</div>' +
+            '<div class="col">' +
+            '<p>Cantidad de obras</p>' +
+            '<div class="porcentaje">' + mensaje + '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>')
+        .addTo(map);
+});
 
 
 map.on('click', 'dif_urbano', function (e) {
