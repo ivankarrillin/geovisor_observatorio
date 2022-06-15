@@ -36,6 +36,27 @@
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+
+
+  
+  <link rel="icon" href="https://geoportal.dane.gov.co/src/images/general/GEOPORTAL-DANE-favicon-32x32.png">
+
+
+
+
+  <meta property="og:title" content="Geovisor Observatorio Inmobiliario Nacional">
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://nowsoft.app/colectora/externo/visor/img/oin.png">
+  <meta property="og:url" content="https://nowsoft.app/colectora/externo/visor/">
+  <meta name="twitter:card" content="Geovisor de análisis de la dinamica inmobiliaria, herramienta de apoyo en el catastro multipropósito.">
+
+
+
+
+
+
+
+
 </head>
 
 <body>
@@ -48,7 +69,7 @@
 
 
       <!-- <div class="col-12 "><img clas="mx-auto" src="./img/DANE__Geovisor__icon__logoDANE__01.svg" id="logo"> </div> -->
-      <div class="row">
+      <div class="head">
         <div class="itm1"><img class="mx-auto" src="./img/DANE__Geovisor__icon__logoDANE__01.svg" id="logo"
             alt="logo-dane"> </div>
         <div class="itm1 offset-1"><img class="mx-auto" src="./img/oin.png" id="logo"
@@ -56,7 +77,7 @@
       </div>
 
       <div class="row container-toolbar">
-        <div class="col-3 container-tool" id="ayuda">
+        <div class="col-4 container-tool" id="ayuda">
           <!-- <img src="./img/DANE__Geovisor__icon__tutorial.svg" id="logo-geo" width="20px" class="img-icon"> -->
           <!-- <span class="img-icon" style="background-image: url(./img/DANE__Geovisor__icon__ask.svg);background-repeat: no-repeat;"></span> -->
           <div class="round-tool">
@@ -67,7 +88,7 @@
           </div>
           <p class="center">Ayuda</p>
         </div>
-        <div class="col-3 container-tool container-tool-active" id="consultas">
+        <div class="col-4 container-tool container-tool-active" id="consultas">
           <!-- <img src="./img/DANE__Geovisor__icon__filter.svg" id="logo-settings" width="20px" class="img-icon color-icon"> -->
           <!-- <svg width="20px" height="20px">
               <use xlink:href="./img/DANE__Geovisor__icon__filter.svg#adobe_illustrator_pgf"></use>
@@ -82,7 +103,7 @@
           <!-- <span class="img-icon" style="background-image: url(./img/DANE__Geovisor__icon__filter.svg);background-repeat: no-repeat;"></span> -->
           <p class="center">Consultas</p>
         </div>
-        <div class="col-3 container-tool" id="mapas-base">
+        <div class="col-4 container-tool" id="mapas-base">
           <!-- <img src="./img/DANE__Geovisor__icon__searchTheme.svg" id="logo-theme" width="20px" class="img-icon"> -->
           <!-- <span class="img-icon" style="background-image: url(./img/DANE__Geovisor__icon__layers.svg);background-repeat: no-repeat;"></span> -->
           <div class="round-tool">
@@ -94,20 +115,7 @@
           <p class="center">Mapas base</p>
         </div>
 
-        <div class="col-3 container-tool" id="descarga">
-          <!-- <img src="./img/DANE__Geovisor__icon__download.svg" id="logo-descarga" width="20px" class="img-icon"> -->
-          <a href="https://nowsoft.app/geoportal/descargas/oin/ofertas_mercado.zip" download>
-            <div class="round-tool">
-              <object type="image/svg+xml" data="./img/DANE__Geovisor__icon__download.svg" width="20" height="20"
-                alt="icono-descarga" class="icon-tool"></object>
-              <object type="image/svg+xml" data="./img/DANE__Geovisor__icon__download_selected.svg" width="20"
-                alt="icono-descarga-seleccionada" height="20" class="icon-tool-selected"></object>
-            </div>
 
-            <p class="center">Descarga</p>
-          </a>
-
-        </div>
       </div>
 
       <div class="row" id="filtro-consultas">
@@ -172,12 +180,40 @@
             <div class="col-12">
 
               <div class="grupo">
-                <p class="itm1">Radio datos (área)</p>
+
+                <p class="itm1">Activar tema</p>
+                <div class="form-check col-2">
+
+                  <label class="switchBtn">
+                    <input type="checkbox" checked id="check_ofertas" name="check_ofertas">
+                    <span class="slide round"></span>
+                  </label>
+                </div>
+
+              </div>
+
+
+              <div class="grupo">
+                <p class="itm1">Visualización</p>
+                <div class="itm2 ">
+                <select class="form-control select shadow-none" id="visual">
+                  <option value='tipo1'>Hexagonal 3D</option>
+                  <option value='tipo2'>Mapa de calor</option>
+                </select>
+              </div>
+            </div>
+
+              <div class="grupo">
+                <p class="itm1">Radio de agrupación</p>
                 <div class="itm2 ">
                   <input type="range" min="0" max="100" step="0" value="100" class="form-control-range slider"
                     id="transparencia_pobreza" name="transparencia_pobreza">
                 </div>
               </div>
+
+
+
+
               <div class="grupo">
                 <p class="itm1">Tipo</p>
                 <div class="itm2 ">
@@ -215,6 +251,26 @@
 
               </div>
             </div>
+            <div class="grupo">
+              <p class="itm1">Área (m2)</p>
+              <div id="my-drbar-container1"></div>
+            </div>
+            <div class="grupo">
+              <p class="itm1"></p>
+              <div class="itm3 ">
+                <p id="minval1">0</p>
+                <p id="maxval1">5000</p>
+              </div>
+            </div>
+
+
+            <div class="grupo">
+              <p class="itm1">Nota</p>
+              <div>
+                <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
+              </div>
+            </div>
+
               </div>
 
             </div>
@@ -316,20 +372,7 @@
             <div class="col-12">
 
 
-              <div class="grupo">
-                <p class="itm1">Nota</p>
-                <div>
-                  <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
-                </div>
-              </div>
 
-              <div class="grupo">
-
-                <p class="itm1">Descargar datos</p>
-                <div>
-                  <button class="ver_nota" id=""> <a href="https://nowsoft.app/colectora/externo/files_oin/dif_censales.zip"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</a> </button>
-                </div>
-              </div>
               <div class="grupo">
 
                 <p class="itm1">Activar tema Urbano</p>
@@ -361,7 +404,20 @@
                     id="transparencia_dif" name="transparencia_dif">
                 </div>
               </div>
+              <div class="grupo">
+                <p class="itm1">Nota</p>
+                <div>
+                  <button class="ver_nota" id="" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-file-pdf"></i> Ver nota</button>
+                </div>
+              </div>
 
+              <div class="grupo">
+
+                <p class="itm1">Descargar datos</p>
+                <div>
+                  <button class="ver_nota" id=""> <a href="https://nowsoft.app/colectora/externo/files_oin/dif_censales.zip"><i class="fas fa-arrow-alt-circle-down"></i> Descargar</a> </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -691,8 +747,6 @@
 
         <div id="state-legend" class="legend">
           <h6 id="title-legend">Leyenda</h6>
-
-
           <button class="accordion" id="panel_ipm">Tipo de inmueble</button>
           <div class="panel leg">
             <div><span style= " background-color: rgb(19, 150, 77)"></span>Penthouse</div>
@@ -772,18 +826,25 @@
 
         <div id="panel-info">
           <div id="content">
-            <p id="titulo">Ofertas de mercado</p>
-            <p id="title">Total ofertas</p>
-            <p id="total">0</p>
-            <p id="title">Datos en mapa</p>
-            <p id="mini">0</p>
-            <figure class="highcharts-figure">
-              <div id="container"></div>
-              <p class="highcharts-description">
-                  Histograma para determinar la distribución de las ofertas de mercado por valor integral de terreno.
-              </p>
-          </figure>
 
+            <button class="accordion" id="panel_est">Estadísticas</button>
+
+            <div class="panel leg">
+              <p id="title">Total ofertas</p>
+              <p id="total">0</p>
+              <p id="title">Datos en mapa</p>
+              <p id="mini">0</p>
+              <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    Histograma para determinar la distribución de las ofertas de mercado por valor integral de terreno.
+                </p>
+            </figure>
+              
+            </div>
+
+
+            
 
 
           </div>
@@ -836,9 +897,9 @@
             <p class="help__content__text">
             <div class="row">
               <div class="col">
-                Herramienta web georreferenciada, en la que se puede analizar la dinámica inmobiliaria del país. Las ofertas de mercado han sido obtenidas mediante la estrategia de WebScrapping.
+                Herramienta en la que se puede analizar la dinámica inmobiliaria del país.
                 <br>
-                El visor facilita el análisis de la información inmobiliaria por parte de los gestores y operadores catastrales y el público en general. 
+                El visor facilita el análisis de la información inmobiliaria por parte de los gestores y operadores catastrales y el público en general interesado en el campo inmobiliario.
               </div>
             </div>
             <br>
@@ -848,16 +909,10 @@
                 <br>
                 <a id="nota"
                   href="https://www.dane.gov.co/files/comunicados/Nota_metodologica_indice_de_vulnerabilidad.pdf"
-                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Documento WebScrapping </a>
+                  target="_blank" class="btn btn-sm"><i class="far fa-sticky-note"></i> Documento Observatorio </a>
                 <br>
               </div>
-              <div class="col">
-                <br>
-                <br>
-                <a id="comunicado"
-                  href="https://www.dane.gov.co/files/comunicados/Comunicado_visor_niveles_vulnerabilidad_covid19_Abril-15-2020.pdf"
-                  target="_blank" class="btn btn-sm"><i class="fas fa-info"></i> Comunicado de prensa </a>
-              </div>
+
             </div>
             </p>
           </div>

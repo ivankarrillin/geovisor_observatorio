@@ -137,24 +137,39 @@ axios.get('https://nowsoft.app/colectora/externo/files_oin/data.zip',{
     var zip = new JSZip();
     zip.loadAsync(resp.data).then(function(contents) {
         Object.keys(contents.files).forEach(function(filename) {
-            zip.file(filename).async('string').then(function(content) {
-                data = JSON.parse(content);
+            zip.file(filename).async('string').then(function (content) {
+                
+
+                try {
+                    data = JSON.parse(content);
+                } catch(e) {
+                    console.log(e); // error in the above string (in this case, yes)!
+                }
+
+                
                 $("#total").text(data.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
-                updateLayers(radio, minimo, maximo, valor)
+                updateLayers(radio, minimo, maximo, valor,estrato_min,estrato_max)
             });
         });
     });
     
 });
 
-var updateLayers = (radio, minimo, maximo, valor) => {
+var updateLayers = (radio, minimo, maximo, valor,estrato_min,estrato_max) => {
           
+
+    console.log(minimo)
+    console.log(maximo)
+    console.log("-------")
+    console.log(estrato_min)
+    console.log(estrato_max)
+
     var filter=[]
 
       if (valor=="all") {
         filter = data.filter(function(item) {
      
-            if (item[2] >minimo && item[2] <maximo ) {
+            if (item[2] >minimo && item[2] <maximo && item[9] >=estrato_min && item[9] <=estrato_max) {
                 return item
               }
               
@@ -162,7 +177,7 @@ var updateLayers = (radio, minimo, maximo, valor) => {
       } else {
         filter = data.filter(function(item) {
      
-            if (item[2] >minimo && item[2] <maximo && item[0] == valor) {
+            if (item[2] >minimo && item[2] <maximo && item[0] == valor && item[9] >=estrato_min && item[9] <=estrato_max) {
                 return item
               }
               
@@ -171,6 +186,13 @@ var updateLayers = (radio, minimo, maximo, valor) => {
       
       $("#mini").text(filter.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
       
+    
+    function getMean(points) {
+          
+        return points.reduce((sum, p) => sum += p[10], 0) / points.length;
+    }
+
+    
     deck.setProps({
         layers: [
             new HexagonLayer({
@@ -178,13 +200,35 @@ var updateLayers = (radio, minimo, maximo, valor) => {
                 id: 'heatmp-layer',
                 pickable: true,
                 radius: radio,
-                elevationScale: radio*0.5,
-                elevationRange: [0, 200],
+                elevationScale: radio*0.3,
+                elevationRange: [0, 50],
                 extruded: true,
-                getPosition: d => [d[9], d[8], 0],
-                upperPercentile:99.5,
+                getPosition: d => [d[7], d[6], 0],
+                upperPercentile:94,
                 radiusPixels:50,
                 intensity: 1,
+                getColorValue: getMean,
+                getElevationValue: getMean,
+                colorRange :  [
+                    [1, 152, 189],
+                    [73, 227, 206],
+                    [216, 254, 181],
+                    [254, 237, 177],
+                    [254, 173, 84],
+                    [209, 55, 78]
+                  ],
+                threshold: 0.01,
+                debounceTimeout:1000
+            }),
+            new HeatmapLayer({
+                data: filter,
+                id: 'heatmp',
+                pickable: false, 
+                getPosition: d => [d[7], d[6], 0],
+                getWeight: d => d[10],
+                upperPercentile:94,
+                radiusPixels:radio*0.1,
+                intensity: radio*0.2,
                 colorRange :  [
                     [1, 152, 189],
                     [73, 227, 206],
@@ -205,16 +249,86 @@ var updateLayers = (radio, minimo, maximo, valor) => {
       for (var i = 0; i < filter.length; i++){
         
           var obj = filter[i];
-          arr.push(obj[11])
+        
+            arr.push(obj[10])
+          
+         
     
       }
 
+    const shuffled = arr.sort(() => 0.5 - Math.random());
+    let selected = shuffled;
+    if (arr.length > 10000) {
+        selected = shuffled.slice(0, 10000);
+    }
+      
+    
+      chart.series[0].setData(binData(selected)); 
+    chart.redraw();
+    
 
 
-      chart.series[0].setData(binData(arr.slice(Number(arr.length/2)))); //true / false to redraw
-      chart.redraw();
+
+
+
+
+
+
+
       
   }
+
+
+  $("#check_ofertas").change(function () {
+
+      
+    if(this.checked) {
+        map.setLayoutProperty('heatmp-layer', 'visibility', 'visible');
+        map.setLayoutProperty('heatmp', 'visibility', 'visible');
+        $('#panel-info').show()
+    }else{
+        map.setLayoutProperty('heatmp-layer', 'visibility', 'none');
+        map.setLayoutProperty('heatmp', 'visibility', 'none');
+        $('#panel-info').hide()
+    }
+      
+    
+
+  });
+
+
+  function myFunction(x) {
+    if (x.matches) { // If media query matches
+        
+    } else {
+        $('#panel_est').click()
+    }
+  }
+  
+  var x = window.matchMedia("(max-width: 700px)")
+  myFunction(x) // Call listener function at run time
+  x.addListener(myFunction) // Attach listener function on state changes
+
+
+
+
+$("#visual").change(function () {
+
+    const val = $(this).val();
+          
+
+    if (val == "tipo1") {
+        map.setLayoutProperty('heatmp-layer', 'visibility', 'visible');
+        map.setLayoutProperty('heatmp', 'visibility', 'none');
+        
+    } else {
+        map.setLayoutProperty('heatmp-layer', 'visibility', 'none');
+        map.setLayoutProperty('heatmp', 'visibility', 'visible');
+    }
+
+});
+
+  
 
 $.toast({
     heading: 'Información',
@@ -260,8 +374,12 @@ const images = importAll(require.context('../img/', false, /\.(png|jpg|svg)$/));
 var radio = 100;
 var minimo = 0;
 var maximo = 10000000000;
-var valor='all'
+var valor = 'all'
 
+var estrato_min = 0;
+var estrato_max = 5000;
+
+var visual = "tipo1";
 
 
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
@@ -496,10 +614,15 @@ $( "#transparencia_embarazo" ).change(function() {
           
           valor = val;
      
-          updateLayers(radio, minimo, maximo, valor);
+          updateLayers(radio, minimo, maximo, valor,estrato_min,estrato_max);
 
 
       });
+    
+    
+
+    
+    
       const drbar = new DualHRangeBar('my-drbar-container', {
           minimizes: false, // Minimises the container when inactive
           size: 'default',  // Size of the dual range bar
@@ -511,6 +634,17 @@ $( "#transparencia_embarazo" ).change(function() {
           upper: 3000000000,         // Initial value for "upper"
       });
 
+      const drbar_est = new DualHRangeBar('my-drbar-container1', {
+        minimizes: false, // Minimises the container when inactive
+        size: 'default',  // Size of the dual range bar
+        lowerBound: 0,    // Initial value for "lowerBound"
+        upperBound: 1000,    // Initial value for "upperBound"
+        minSpan: 20,     // Initial value for "minSpan"
+        maxSpan: 1000,       // Initial value for "maxSpan"
+        lower: 0,         // Initial value for "lower"
+        upper: 1000,         // Initial value for "upper"
+    });
+    
       drbar.addEventListener('update', (e) => {
 
       
@@ -520,15 +654,21 @@ $( "#transparencia_embarazo" ).change(function() {
           $("#minval").text(formatter.format(minimo));
           $("#maxval").text(formatter.format(maximo));
 
-          updateLayers(radio, minimo, maximo, valor)
-
-          
-
-
-
+          updateLayers(radio, minimo, maximo, valor,estrato_min,estrato_max)
       });
 
+      drbar_est.addEventListener('update', (e) => {
 
+      
+        estrato_min = e.detail.lower;
+        estrato_max = e.detail.upper;
+
+        $("#minval1").text(Math.round(estrato_min));
+        $("#maxval1").text(Math.round(estrato_max));
+          
+        updateLayers(radio, minimo, maximo, valor,estrato_min,estrato_max)
+     
+    });
 
 
   $( "#transparencia_pobreza" ).change(function() {
@@ -549,7 +689,7 @@ $( "#transparencia_embarazo" ).change(function() {
       
       console.log(valor)
 
-      updateLayers(radio,minimo,maximo,valor)
+      updateLayers(radio,minimo,maximo,valor,estrato_min,estrato_max)
 
 
       
@@ -867,7 +1007,7 @@ function meanPoints(arr) {
     for(var i = 0; i < arr.length; i++) {
         var obj = arr[i];
     
-        prom.push(obj.source[11]);
+        prom.push(obj.source[10]);
     }
 
     const sum = prom.reduce((a,b) => a + b, 0);
@@ -897,30 +1037,7 @@ const deck = new Deck({
       },
     layers: [
         
-        new HexagonLayer({
-            data: data,
-            id: 'heatmp-layer',
-            pickable: true,
-            radius: 100,
-            elevationScale: 250,
-            elevationRange: [0, 500],
-            extruded: true,
 
-            getPosition: d => [d[9], d[8], 0],
-            upperPercentile:99.5,
-            radiusPixels:50,
-            intensity: 1,
-            colorRange :  [
-                [1, 152, 189],
-                [73, 227, 206],
-                [216, 254, 181],
-                [254, 237, 177],
-                [254, 173, 84],
-                [209, 55, 78]
-              ],
-            threshold: 0.01,
-            debounceTimeout:1000
-          })
         
         /*
         new HexagonLayer({
@@ -1256,7 +1373,7 @@ map.on('load', function () {
                       "maxZoom": 13
                   },
                   'waterway-label'
-                  );
+            my-scatterplot      );
                   */
 
 
@@ -1274,8 +1391,10 @@ function inicializarMapa() {
 /*
     map.addLayer(new MapboxLayer({id: 'my-scatterplot', deck}));
     */
-    map.addLayer(new MapboxLayer({id: 'my-scatterplot', deck}));
+    map.addLayer(new MapboxLayer({id: 'heatmp-layer', deck}));
+    map.addLayer(new MapboxLayer({id: 'heatmp', deck}));
     
+    map.setLayoutProperty('heatmp', 'visibility', 'none');
 
 
     map.addSource('ip', {

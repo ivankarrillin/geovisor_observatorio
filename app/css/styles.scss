@@ -44,6 +44,11 @@ $dark-grey: #5F6162;
   margin-bottom: 10px;
 }
 
+.head{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 #video:hover,#nota:hover{
   color: white;
   background-color: #880E4F;
@@ -256,7 +261,7 @@ p,label{
   }
   
 
- #my-drbar-container{
+ #my-drbar-container, #my-drbar-container1{
     /* Colors */
     --slider-color: #97034C;
     --range-color: #5B5B5B;
@@ -272,6 +277,10 @@ p,label{
     display: grid;
     width: 100%;
   }
+
+
+
+  
 .drbar-bg{
   display: grid !important;
   width: 45% !important;
